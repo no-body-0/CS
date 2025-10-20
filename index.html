@@ -5,15 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Codes By Dev Kumar Mahur</title>
 
-    <!-- Shadow Fight 2-like font -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body, html {
             height: 100%;
@@ -50,7 +45,6 @@
         h1 {
             color: black !important;
             font-size: 2rem;
-            text-shadow: none !important;
         }
 
         a {
@@ -65,7 +59,6 @@
             text-shadow: 0 0 8px red, 0 0 16px red, 0 0 24px red;
         }
 
-        /* Music toggle button */
         .music-toggle {
             position: fixed;
             top: 15px;
@@ -81,41 +74,37 @@
             transition: 0.3s;
         }
 
+        .music-toggle.active {
+            background: red;
+            color: black;
+            text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000;
+        }
+
         .music-toggle:hover {
             background: red;
             color: black;
-            text-shadow: 0 0 8px #ff0000, 0 0 16px #ff0000;
         }
 
         @media (max-width: 600px) {
-            h1 {
-                font-size: 1.5rem;
-            }
-            a {
-                font-size: 1rem;
-            }
-            .content {
-                padding: 10px;
-            }
+            h1 { font-size: 1.5rem; }
+            a { font-size: 1rem; }
+            .content { padding: 10px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Background video -->
     <div class="video-container">
         <video autoplay muted loop playsinline>
             <source src="samurai.mp4" type="video/mp4">
         </video>
     </div>
 
-    <!-- Background music -->
     <audio id="bg-music" loop>
         <source src="music.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- Toggle button -->
-    <div class="music-toggle" id="music-btn">🔊</div>
+    <div class="music-toggle" id="music-btn">🔈 Tap or Scroll to Start Music</div>
 
     <div class="content">
         <h1>Program 1</h1><a href="https://www.programiz.com/online-compiler/0lKcieAoqX2pB" target="_blank">Run the code</a>
@@ -130,48 +119,49 @@
         <h1>Program 10</h1><a href="https://www.programiz.com/online-compiler/18Moau82QDI8p" target="_blank">Run the code</a>
     </div>
 
-    <!-- Music autoplay + fade-in + toggle -->
     <script>
         const audio = document.getElementById('bg-music');
         const btn = document.getElementById('music-btn');
         let isPlaying = false;
 
-        // Try autoplay + fade in
-        window.addEventListener('load', () => {
-            const fadeDuration = 3000;
-            let volume = 0;
+        function fadeInAudio() {
             audio.volume = 0;
-            audio.muted = true;
+            let vol = 0;
+            const fade = setInterval(() => {
+                vol += 0.05;
+                if (vol > 1) vol = 1;
+                audio.volume = vol;
+                if (vol >= 1) clearInterval(fade);
+            }, 200);
+        }
 
-            audio.play().then(() => {
-                isPlaying = true;
-                btn.textContent = "🔊";
-                setTimeout(() => {
-                    audio.muted = false;
-                    const fade = setInterval(() => {
-                        if (volume < 1) {
-                            volume += 0.05;
-                            audio.volume = volume;
-                        } else clearInterval(fade);
-                    }, fadeDuration / 20);
-                }, 1000);
-            }).catch(() => {
-                document.addEventListener('click', () => audio.play(), { once: true });
-            });
-        });
+        function startMusic() {
+            if (!isPlaying) {
+                audio.play().then(() => {
+                    fadeInAudio();
+                    isPlaying = true;
+                    btn.textContent = "🔊 Music On";
+                    btn.classList.add('active');
+                }).catch(err => console.log(err));
+            }
+        }
 
-        // Toggle button control
+        // Start on tap/click
         btn.addEventListener('click', () => {
             if (isPlaying) {
                 audio.pause();
-                btn.textContent = "🔈";
                 isPlaying = false;
+                btn.textContent = "🔈 Tap or Scroll to Start Music";
+                btn.classList.remove('active');
             } else {
-                audio.play();
-                btn.textContent = "🔊";
-                isPlaying = true;
+                startMusic();
             }
         });
+
+        // Also start on first scroll
+        window.addEventListener('scroll', () => {
+            startMusic();
+        }, { once: true });
     </script>
 
 </body>
