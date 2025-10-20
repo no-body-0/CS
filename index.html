@@ -103,7 +103,7 @@
     </audio>
 
     <!-- Music Toggle Button -->
-    <div class="music-btn" id="music-btn">🔈 Music Off</div>
+    <div class="music-btn" id="music-btn">🔈</div>
 
     <!-- Page Content -->
     <div class="content">
@@ -143,7 +143,7 @@
             started = true;
             audio.play().then(() => {
                 fadeIn(audio, 1500);
-                btn.textContent = "🔊 Music On";
+                btn.textContent = "🔊";
                 btn.classList.add("active");
                 isPlaying = true;
             }).catch(err => console.log("Autoplay blocked:", err));
@@ -163,12 +163,12 @@
             }
             if (isPlaying) {
                 audio.pause();
-                btn.textContent = "🔈 Music Off";
+                btn.textContent = "🔈";
                 btn.classList.remove("active");
                 isPlaying = false;
             } else {
                 audio.play().then(() => {
-                    btn.textContent = "🔊 Music On";
+                    btn.textContent = "🔊";
                     btn.classList.add("active");
                     isPlaying = true;
                 }).catch(err => console.log("Play error:", err));
