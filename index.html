@@ -103,7 +103,7 @@
     </audio>
 
     <!-- Music Toggle Button -->
-    <div class="music-btn" id="music-btn">🔈 Music Off</div>
+    <div class="music-btn active" id="music-btn">🔊</div>
 
     <!-- Page Content -->
     <div class="content">
@@ -143,13 +143,13 @@
             started = true;
             audio.play().then(() => {
                 fadeIn(audio, 1500);
-                btn.textContent = "🔊 Music On";
+                btn.textContent = "🔊";
                 btn.classList.add("active");
                 isPlaying = true;
             }).catch(err => console.log("Autoplay blocked:", err));
         }
 
-        // Listen for user interaction (any gesture)
+        // Start on first scroll or tap
         ["click", "scroll", "wheel", "touchstart", "keydown"].forEach(event => {
             window.addEventListener(event, startMusic, { once: true, passive: true });
         });
@@ -163,12 +163,12 @@
             }
             if (isPlaying) {
                 audio.pause();
-                btn.textContent = "🔈 Music Off";
+                btn.textContent = "🔈";
                 btn.classList.remove("active");
                 isPlaying = false;
             } else {
                 audio.play().then(() => {
-                    btn.textContent = "🔊 Music On";
+                    btn.textContent = "🔊";
                     btn.classList.add("active");
                     isPlaying = true;
                 }).catch(err => console.log("Play error:", err));
@@ -176,4 +176,4 @@
         });
     </script>
 </body>
-            </html>
+    </html>
