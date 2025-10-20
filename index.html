@@ -58,7 +58,7 @@
 
         a:hover {
             color: #ff0000;
-            text-shadow: 0 0 8px red, 0 0 16px red, 0 0 24px red;
+            text-shadow: 0 0 6px red, 0 0 12px red; /* smaller glow for small hitbox */
         }
 
         /* Music toggle button */
@@ -100,12 +100,12 @@
     </div>
 
     <!-- Background Music -->
-    <audio id="bg-music" loop preload="auto">
+    <audio id="bg-music" loop preload="auto" autoplay>
         <source src="music.mp3" type="audio/mpeg">
     </audio>
 
     <!-- Music Toggle Button -->
-    <div class="music-btn" id="music-btn">🔈</div>
+    <div class="music-btn active" id="music-btn">🔊</div>
 
     <!-- Page Content -->
     <div class="content">
@@ -124,45 +124,11 @@
     <script>
         const audio = document.getElementById('bg-music');
         const btn = document.getElementById('music-btn');
-        let isPlaying = false;
-        let started = false;
-
-        // Fade-in function
-        function fadeIn(audio, duration = 1500) {
-            audio.volume = 0;
-            const step = 50;
-            const increment = step / duration;
-            let vol = 0;
-            const fade = setInterval(() => {
-                vol = Math.min(1, vol + increment);
-                audio.volume = vol;
-                if (vol >= 1) clearInterval(fade);
-            }, step);
-        }
-
-        function startMusic() {
-            if (started) return;
-            started = true;
-            audio.play().then(() => {
-                fadeIn(audio, 1500);
-                btn.textContent = "🔊";
-                btn.classList.add("active");
-                isPlaying = true;
-            }).catch(err => console.log("Autoplay blocked:", err));
-        }
-
-        // Listen for user interaction (any gesture)
-        ["click", "scroll", "wheel", "touchstart", "keydown"].forEach(event => {
-            window.addEventListener(event, startMusic, { once: true, passive: true });
-        });
+        let isPlaying = true; // starts autoplay
 
         // Toggle button manually
         btn.addEventListener("click", (e) => {
             e.stopPropagation();
-            if (!started) {
-                startMusic();
-                return;
-            }
             if (isPlaying) {
                 audio.pause();
                 btn.textContent = "🔈";
