@@ -18,7 +18,6 @@
         overflow: auto;
     }
 
-    /* Background video */
     .video-container {
         position: fixed;
         top: 0; left: 0;
@@ -32,7 +31,6 @@
         object-fit: cover;
     }
 
-    /* Content section */
     .content {
         position: relative;
         z-index: 1;
@@ -43,31 +41,30 @@
     }
 
     .program {
-        display: inline-block;  /* container shrinks to content */
+        display: inline-block;
         margin-bottom: 10px;
     }
 
     h1 {
         color: black !important;
         font-size: 2rem;
-        margin-bottom: 5px; /* minimal spacing below heading */
+        margin-bottom: 5px;
     }
 
     a {
         color: red;
         text-decoration: none;
         font-size: 1.2rem;
-        display: inline;  /* hitbox only around text */
+        display: inline;
         padding: 0;
         line-height: 1;
     }
 
     a:hover {
         color: #ff0000;
-        text-shadow: 0 0 6px red, 0 0 12px red; /* glow fits text only */
+        text-shadow: 0 0 6px red, 0 0 12px red;
     }
 
-    /* Music toggle button */
     .music-btn {
         position: fixed;
         top: 15px;
@@ -98,69 +95,65 @@
 </head>
 <body>
 
-<!-- Background video -->
 <div class="video-container">
     <video autoplay muted loop playsinline>
         <source src="samurai.mp4" type="video/mp4">
     </video>
 </div>
 
-<!-- Background Music -->
 <audio id="bg-music" loop preload="auto" autoplay>
     <source src="music.mp3" type="audio/mpeg">
 </audio>
 
-<!-- Music Toggle Button -->
 <div class="music-btn active" id="music-btn">🔊</div>
 
-<!-- Page Content -->
 <div class="content">
     <div class="program">
         <h1>Program 1</h1>
-        <a href="https://www.programiz.com/online-compiler/0lKcieAoqX2pB" target="_blank">Run the code</a>
+        <a href="">Run the code</a>
     </div>
     <div class="program">
         <h1>Program 2</h1>
-        <a href="https://www.programiz.com/online-compiler/9S5wHsLLa68wi" target="_blank">Run the code</a>
+        <a href="">Run the code</a>
     </div>
     <div class="program">
         <h1>Program 3</h1>
-        <a href="https://www.programiz.com/online-compiler/10mk8LLSKUgKM" target="_blank">Run the code</a>
+        <a href="">Run the code</a>
     </div>
     <div class="program">
         <h1>Program 4</h1>
-        <a href="https://www.programiz.com/online-compiler/5wjYrKt0BTuLi" target="_blank">Run the code</a>
+        <a href="">Run the code</a>
     </div>
     <div class="program">
         <h1>Program 5</h1>
-        <a href="https://www.programiz.com/online-compiler/2Z2s06TfSc3lH" target="_blank">Run the code</a>
+        <a href="">Run the code</a>
     </div>
     <div class="program">
         <h1>Program 6</h1>
-        <a href="https://www.programiz.com/online-compiler/0moBMq0vRzeQt" target="_blank">Run the code</a>
+        <a href="">Run the code</a>
     </div>
     <div class="program">
         <h1>Program 7</h1>
-        <a href="https://www.programiz.com/online-compiler/1HhrgA25lLOzh" target="_blank">Run the code</a>
+        <a href="">Run the code</a>
     </div>
     <div class="program">
         <h1>Program 8</h1>
-        <a href="https://www.programiz.com/online-compiler/6vpLQZMSsa3JP" target="_blank">Run the code</a>
+        <a href="">Run the code</a>
     </div>
     <div class="program">
         <h1>Program 9</h1>
-        <a href="https://www.programiz.com/online-compiler/70mk8LlW6ULwo" target="_blank">Run the code</a>
+        <a href="">Run the code</a>
     </div>
     <div class="program">
         <h1>Program 10</h1>
-        <a href="https://www.programiz.com/online-compiler/18Moau82QDI8p" target="_blank">Run the code</a>
+        <a href="">Run the code</a>
     </div>
 </div>
 
 <script>
     const audio = document.getElementById('bg-music');
     const btn = document.getElementById('music-btn');
-    let isPlaying = true; // starts autoplay
+    let isPlaying = true;
 
     btn.addEventListener("click", (e) => {
         e.stopPropagation();
