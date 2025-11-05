@@ -101,11 +101,11 @@
     </video>
 </div>
 
-<audio id="bg-music" loop preload="auto" autoplay>
+<audio id="bg-music" loop preload="auto">
     <source src="music.mp3" type="audio/mpeg">
 </audio>
 
-<div class="music-btn active" id="music-btn">🔊</div>
+<div class="music-btn" id="music-btn">🔈</div>
 
 <div class="content">
     <div class="program">
@@ -153,7 +153,7 @@
 <script>
     const audio = document.getElementById('bg-music');
     const btn = document.getElementById('music-btn');
-    let isPlaying = true;
+    let isPlaying = false; // start OFF
 
     btn.addEventListener("click", (e) => {
         e.stopPropagation();
@@ -168,6 +168,13 @@
                 btn.classList.add("active");
                 isPlaying = true;
             }).catch(err => console.log("Play error:", err));
+        }
+    });
+
+    // Prevent accidental play on any other click
+    document.addEventListener("click", (e) => {
+        if (e.target !== btn && isPlaying === false) {
+            audio.pause();
         }
     });
 </script>
